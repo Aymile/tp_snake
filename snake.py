@@ -92,3 +92,4 @@ while running:
         pg.time.wait(4000)
         running=0
     pg.display.update()
+    pg.display.set_caption(f"Snake Game - Score : {SCORE}")
