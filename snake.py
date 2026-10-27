@@ -7,9 +7,10 @@ clock = pg.time.Clock()
 
 while True:
     clock.tick(1)
-
     for event in pg.event.get():
-        pass
+        if event.type==pg.KEYDOWN:
+            if event.key==pg.K_q:
+                pg.QUIT()
 
     random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
     screen.fill(random_color)
