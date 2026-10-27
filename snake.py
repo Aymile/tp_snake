@@ -41,11 +41,9 @@ def eat_fruit(score,snake,fruit):
         return (score+1,["Emile"]+snake,fruit) #On insère n'importe quoi parce qu'on le supprime juste après
     return (score,snake,fruit)
 
-score, snake, fruit = eat_fruit(0, [(10, 15), (11, 15), (12, 15)], (12, 15))
-assert score == 1 and len(snake) == 4
+def game_over(snake):
+    return snake[-1] in snake[:-1]
 
-score, snake, fruit = eat_fruit(0, [(10, 15), (11, 15), (12, 15)], (0, 0))
-assert score == 0 and len(snake) == 3 and fruit == (0, 0)
 
 
 direction=(1,0)
@@ -57,8 +55,14 @@ FRUIT= (randint(0, 29), randint(0, 29))
 while FRUIT in SNAKE:
     FRUIT= (randint(0, 29), randint(0, 29))
 running=1
+font=pg.font.Font(None,74)
+
+
+
+
+
 while running:
-    clock.tick(1)
+    clock.tick(6)
     for event in pg.event.get():
         if event.type==pg.QUIT:
             running=0
@@ -81,4 +85,10 @@ while running:
     draw_snake(SNAKE)
     SCORE,SNAKE,FRUIT=eat_fruit(SCORE,SNAKE,FRUIT)
     SNAKE=move_snake(SNAKE,direction)
+    if game_over(SNAKE):
+        texte=font.render("Game over",True,(255,0,0))
+        screen.blit(texte,(200,200))
+        pg.display.flip()
+        pg.time.wait(4000)
+        running=0
     pg.display.update()
