@@ -7,21 +7,11 @@ clock = pg.time.Clock()
 
 
 def draw_board():
-    color=(255,255,255)
-    ind=0
-    for i in range(225):
-        x,y=ind%600,40*(ind//600)
-        rect = pg.Rect(x, y, 20, 20)
-        pg.draw.rect(screen, color, rect)
-        ind+=40
-    ind=20
-    for i in range(225):
-        x,y=ind%600,40*(ind//600)+20
-        rect = pg.Rect(x, y, 20, 20)
-        pg.draw.rect(screen, color, rect)
-        ind+=40
+    for i in range(30):
+        for j in range(30):
+            if (i+j)%2==0:
+                pg.draw.rect(screen, (255,255,255), rect = pg.Rect(i*20, j*20, 20, 20))
 #On dessine 450 pixels en tout
-
 
 def draw_snake(snake):
     for case in snake:
@@ -42,7 +32,7 @@ def eat_fruit(score,snake,fruit):
     return (score,snake,fruit)
 
 def game_over(snake):
-    return snake[-1] in snake[:-1]
+    return snake[-1] in snake[:-1] or snake[-1][1]==-1 or snake[-1][0]==-1 or snake[-1][1]==30 or snake[-1][0]==30
 
 
 
